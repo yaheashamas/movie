@@ -13,12 +13,18 @@ dependencies:
     sdk: flutter
   cupertino_icons: ^1.0.2
   bloc: ^8.1.0
+  flutter_bloc: ^8.1.1
   equatable: ^2.0.5
   dio: ^4.0.6
   dartz: ^0.10.1
   connectivity_plus: ^2.3.6
   get_it: ^7.2.0
-
+  google_fonts: ^3.0.1
+  easy_localization: ^3.0.1
+  flutter_screenutil: ^5.5.4
+  flutter_svg: ^1.1.5
+  cached_network_image: ^3.2.2
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -27,3 +33,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/svgs/
+    - assets/pngs/

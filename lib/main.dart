@@ -1,27 +1,23 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:movies/core/network/api.dart';
 import 'package:movies/di.dart';
-import 'package:movies/features/movie/domain/usecases/get_trending_use_case.dart';
+import 'package:movies/features/movie/presentation/pages/movie_app_screen.dart';
 
-void main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   //display plan url
   await Api.initializeInterceptors();
   //di
-  await configureDependencies();
-  getIt.get<GetTrendingUseCase>();
-  //run main app
-  runApp(MyApp());
-}
+  await configureInjection();
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(child: Text("data")),
-      ),
-    );
-  }
+  unawaited(
+    SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp],
+    ),
+  );
+  //run main app
+  runApp(const MovieAppScreen());
 }

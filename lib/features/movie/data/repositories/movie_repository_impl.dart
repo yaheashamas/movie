@@ -8,17 +8,17 @@ import 'package:movies/features/movie/domain/repositories/movie_repository.dart'
 
 class MovieRepositoryImpl extends HandelBodyRepositoryImpl
     implements MovieRepository {
-  MovieRemoteDateSourceImpl movieRemoteDateSourceImpl;
+  MovieRemoteDateSource movieRemoteDateSource;
 
   MovieRepositoryImpl(
-    this.movieRemoteDateSourceImpl,
+    this.movieRemoteDateSource,
     ConnectionToEnterNet connectionToEnterNet,
   ) : super(connectionToEnterNet);
 
   @override
   Future<Either<Failure, List<MovieModel>>> getComingSoon() async {
     return body(() async {
-      var result = await movieRemoteDateSourceImpl.getComingSoon();
+      var result = await movieRemoteDateSource.getComingSoon();
       return right(result);
     });
   }
@@ -26,7 +26,7 @@ class MovieRepositoryImpl extends HandelBodyRepositoryImpl
   @override
   Future<Either<Failure, List<MovieModel>>> getPlayingNow() async {
     return body(() async {
-      var result = await movieRemoteDateSourceImpl.getPlayingNow();
+      var result = await movieRemoteDateSource.getPlayingNow();
       return right(result);
     });
   }
@@ -34,7 +34,7 @@ class MovieRepositoryImpl extends HandelBodyRepositoryImpl
   @override
   Future<Either<Failure, List<MovieModel>>> getPopular() async {
     return body(() async {
-      var result = await movieRemoteDateSourceImpl.getPopular();
+      var result = await movieRemoteDateSource.getPopular();
       return right(result);
     });
   }
@@ -42,7 +42,7 @@ class MovieRepositoryImpl extends HandelBodyRepositoryImpl
   @override
   Future<Either<Failure, List<MovieModel>>> getTrending() async {
     return body(() async {
-      var result = await movieRemoteDateSourceImpl.getTrending();
+      var result = await movieRemoteDateSource.getTrending();
       return right(result);
     });
   }

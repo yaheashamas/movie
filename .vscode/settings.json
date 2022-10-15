@@ -3,6 +3,11 @@
         "cupertino",
         "dartz",
         "datasources",
+        "dimen",
+        "pngs",
+        "screenutil",
+        "svgs",
+        "unawaited",
         "usecases"
     ]
 }
