@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:movies/core/exception/exception.dart';
+import 'package:movies/core/error/exception/exception.dart';
 import 'package:movies/core/network/api.dart';
 import 'package:movies/features/movie/data/datasources/const.dart';
 import 'package:movies/features/movie/data/models/movie_model.dart';
@@ -9,7 +9,7 @@ abstract class MovieRemoteDateSource {
   Future<List<MovieModel>> getTrending();
   Future<List<MovieModel>> getPopular();
   Future<List<MovieModel>> getComingSoon();
-  Future<List<MovieModel>> getPlayingNoe();
+  Future<List<MovieModel>> getPlayingNow();
 }
 
 class MovieRemoteDateSourceImpl extends MovieRemoteDateSource {
@@ -47,7 +47,7 @@ class MovieRemoteDateSourceImpl extends MovieRemoteDateSource {
   }
 
   @override
-  Future<List<MovieModel>> getPlayingNoe() async {
+  Future<List<MovieModel>> getPlayingNow() async {
     try {
       var response = await Api.dio.get(playingNowAPI);
       final movies = MoviesResultModel.fromJson(response.data).movies;

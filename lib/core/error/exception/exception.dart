@@ -1,5 +1,5 @@
 class ServerException implements Exception {
-  final String message;
-  ServerException(this.message);
+  final String error;
+  ServerException(this.error);
 }
 class NoInternetException implements Exception {}
