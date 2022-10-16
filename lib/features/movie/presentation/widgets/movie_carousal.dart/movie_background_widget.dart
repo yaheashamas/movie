@@ -5,11 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies/config/common/constants/size_constants.dart';
 import 'package:movies/core/network/api.dart';
-import 'package:movies/features/movie/domain/entities/movie_entity.dart';
-import 'package:movies/features/movie/presentation/bloc/movie_backdrop/movie_backdrop_cubit.dart';
+import 'package:movies/features/movie/presentation/bloc/movie_carousal/movie_carousal_cubit.dart';
+import 'package:movies/features/movie/presentation/bloc/movie_carousal/movie_carousal_state.dart';
 
 class MovieBackGroundWidget extends StatelessWidget {
-  const MovieBackGroundWidget({Key? key}) : super(key: key);
+
+  const MovieBackGroundWidget({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +30,11 @@ class MovieBackGroundWidget extends StatelessWidget {
             FractionallySizedBox(
               heightFactor: 1,
               widthFactor: 1,
-              child: BlocBuilder<MovieBackdropCubit, MovieEntity?>(
-                builder: (context, movie) {
+              child: BlocBuilder<MovieCarousalCubit, MovieCarousalState>(
+                builder: (context, state) {
                   return CachedNetworkImage(
-                    imageUrl: '${Api.baseImageKey}${movie?.backdropPath}',
+                    imageUrl:
+                        '${Api.baseImageKey}${state.movies[state.defaultIndex].backdropPath}',
                     fit: BoxFit.fitHeight,
                   );
                 },
