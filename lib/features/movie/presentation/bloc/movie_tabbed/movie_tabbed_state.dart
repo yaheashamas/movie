@@ -1,19 +1,20 @@
+
 import 'package:equatable/equatable.dart';
 import 'package:movies/features/movie/domain/entities/movie_entity.dart';
 
-class MovieCarousalState extends Equatable {
+class MovieTabbedState extends Equatable {
   final List<MovieEntity> movies;
   final int defaultIndex;
   final bool loaded;
 
-  const MovieCarousalState({
+  const MovieTabbedState({
     required this.movies,
     required this.defaultIndex,
     required this.loaded,
   });
 
-  factory MovieCarousalState.init() {
-    return const MovieCarousalState(
+  factory MovieTabbedState.init() {
+    return const MovieTabbedState(
       movies: [],
       defaultIndex: 0,
       loaded: false,
@@ -23,12 +24,12 @@ class MovieCarousalState extends Equatable {
   @override
   List<Object> get props => [movies, defaultIndex];
 
-  MovieCarousalState copyWith({
+  MovieTabbedState copyWith({
     List<MovieEntity>? movies,
     int? defaultIndex,
     bool? loaded,
   }) {
-    return MovieCarousalState(
+    return MovieTabbedState(
       movies: movies ?? this.movies,
       defaultIndex: defaultIndex ?? this.defaultIndex,
       loaded: loaded ?? this.loaded,

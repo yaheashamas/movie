@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies/config/common/constants/size_constants.dart';
 import 'package:movies/features/movie/domain/entities/movie_entity.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_carousal/movie_carousal_cubit.dart';
-import 'package:movies/features/movie/presentation/widgets/movie_carousal.dart/animated_movie_card_widget.dart';
+import 'package:movies/features/movie/presentation/widgets/movie_carousal/animated_movie_card_widget.dart';
 
 class MoviePageViewWidget extends StatefulWidget {
   final int initialPage;

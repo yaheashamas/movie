@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movies/features/movie/domain/entities/movie_entity.dart';
 import 'package:movies/features/movie/presentation/widgets/app_bar_widget.dart';
-import 'package:movies/features/movie/presentation/widgets/movie_carousal.dart/movie_background_widget.dart';
-import 'package:movies/features/movie/presentation/widgets/movie_carousal.dart/movie_page_view_widget.dart';
-import 'package:movies/features/movie/presentation/widgets/movie_carousal.dart/movie_separator_title_widget.dart';
-import 'package:movies/features/movie/presentation/widgets/movie_carousal.dart/movie_title_widget.dart';
+import 'package:movies/features/movie/presentation/widgets/movie_carousal/movie_background_widget.dart';
+import 'package:movies/features/movie/presentation/widgets/movie_carousal/movie_page_view_widget.dart';
+import 'package:movies/features/movie/presentation/widgets/movie_carousal/movie_separator_title_widget.dart';
+import 'package:movies/features/movie/presentation/widgets/movie_carousal/movie_title_widget.dart';
 
 class MovieCarousalWidget extends StatelessWidget {
   final List<MovieEntity> movies;
