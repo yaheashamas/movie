@@ -5,9 +5,11 @@ import 'package:movies/config/common/constants/size_constants.dart';
 import 'package:movies/config/common/constants/languages.dart';
 import 'package:movies/config/common/constants/translation_constants.dart';
 import 'package:movies/config/common/extensions/string_extensions.dart';
+import 'package:movies/core/widgets/dialog/dialog_widget.dart';
 import 'package:movies/core/widgets/drawer/navigator_drawer_expansion_items_widget.dart';
 import 'package:movies/core/widgets/drawer/navigator_drawer_item_widget.dart';
 import 'package:movies/features/movie/presentation/widgets/logo_widget.dart';
+import 'package:wiredash/wiredash.dart';
 
 import '../../../features/movie/presentation/bloc/language/language_bloc.dart';
 
@@ -57,11 +59,25 @@ class NavigationDrawerWidget extends StatelessWidget {
             ),
             NavigatorDrawerItemWidget(
               title: TranslationConstants.feedback.t(context),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pop();
+                Wiredash.of(context).show(inheritMaterialTheme: true);
+              },
             ),
             NavigatorDrawerItemWidget(
               title: TranslationConstants.about.t(context),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pop();
+                showDialog(
+                  context: context,
+                  builder: (context) => const DialogWidget(
+                    title: TranslationConstants.about,
+                    description: TranslationConstants.aboutDescription,
+                    image: "assets/pngs/tmdb_logo.png",
+                    buttonText: TranslationConstants.okay,
+                  ),
+                );
+              },
             ),
           ],
         ),

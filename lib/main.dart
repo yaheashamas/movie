@@ -18,5 +18,5 @@ Future<void> main() async {
     ),
   );
   //run main app
-  runApp(const MovieAppScreen());
+  runApp(MovieAppScreen());
 }
