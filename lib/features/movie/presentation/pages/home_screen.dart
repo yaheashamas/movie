@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/core/widgets/drawer/navigation_drawer_widget.dart';
 import 'package:movies/di.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_carousal/movie_carousal_cubit.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_carousal/movie_carousal_state.dart';
@@ -22,6 +23,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ],
       child: Scaffold(
+        drawer: const NavigationDrawerWidget(),
         body: BlocBuilder<MovieCarousalCubit, MovieCarousalState>(
           builder: (context, state) {
             return state.loaded

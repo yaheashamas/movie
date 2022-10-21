@@ -12,7 +12,6 @@ Future<void> main() async {
   await Api.initializeInterceptors();
   //di
   await configureInjection();
-
   unawaited(
     SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp],

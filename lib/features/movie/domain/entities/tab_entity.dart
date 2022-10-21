@@ -1,8 +1,8 @@
-class Tab {
+class TabEntity {
   final int index;
   final String title;
 
-  const Tab({
+  const TabEntity({
     required this.index,
     required this.title,
   });

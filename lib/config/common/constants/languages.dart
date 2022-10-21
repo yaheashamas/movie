@@ -1,10 +1,8 @@
-// import '../../domain/entities/language_entity.dart';
+import 'package:movies/core/language/language_entity.dart';
 
-// class Languages {
-//   const Languages._();
-
-//   static const languages = [
-//     LanguageEntity(code: 'en', value: 'English'),
-//     LanguageEntity(code: 'es', value: 'Spanish'),
-//   ];
-// }
+class Languages {
+  static const languages = [
+    LanguageEntity("en", "English"),
+    LanguageEntity("es", "spanish"),
+  ];
+}

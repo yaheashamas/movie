@@ -15,6 +15,7 @@ class LogoWidget extends StatelessWidget {
       "assets/pngs/logo.png",
       color: Colors.white,
       height: height.h,
+      width: double.infinity,
     );
   }
 }

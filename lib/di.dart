@@ -7,6 +7,7 @@ import 'package:movies/features/movie/domain/usecases/get_coming_soon_use_case.d
 import 'package:movies/features/movie/domain/usecases/get_playing_now_use_case.dart';
 import 'package:movies/features/movie/domain/usecases/get_popular_use_case.dart';
 import 'package:movies/features/movie/domain/usecases/get_trending_use_case.dart';
+import 'package:movies/features/movie/presentation/bloc/language/language_bloc.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_carousal/movie_carousal_cubit.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_tabbed/movie_tabbed_cubit.dart';
 
@@ -36,4 +37,5 @@ Future<void> configureInjection() async {
   //bloc
   getIt.registerFactory(() => MovieCarousalCubit(getIt()));
   getIt.registerFactory(() => MovieTabbedCubit(getIt(), getIt(), getIt()));
+  getIt.registerSingleton<LanguageBloc>(LanguageBloc());
 }

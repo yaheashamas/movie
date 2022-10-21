@@ -3,6 +3,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies/config/common/constants/size_constants.dart';
+import 'package:movies/config/common/extensions/string_extensions.dart';
 import 'package:movies/core/network/api.dart';
 
 class MovieTabCardWidget extends StatelessWidget {
@@ -33,7 +34,7 @@ class MovieTabCardWidget extends StatelessWidget {
             top: Sizes.dimen_4.h,
           ),
           child: Text(
-            title,
+            title.intelliTrim(),
             maxLines: 1,
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.bodyText2,
