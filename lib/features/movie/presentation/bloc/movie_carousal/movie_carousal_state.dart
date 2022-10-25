@@ -1,8 +1,10 @@
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
+import 'package:movies/core/error/failure/failure.dart';
 import 'package:movies/features/movie/domain/entities/movie_entity.dart';
 
 class MovieCarousalState extends Equatable {
-  final List<MovieEntity> movies;
+  final Either<Failure, List<MovieEntity>> movies;
   final int defaultIndex;
   final bool loaded;
 
@@ -13,18 +15,18 @@ class MovieCarousalState extends Equatable {
   });
 
   factory MovieCarousalState.init() {
-    return const MovieCarousalState(
-      movies: [],
+    return MovieCarousalState(
+      movies: right([]),
       defaultIndex: 0,
       loaded: false,
     );
   }
 
   @override
-  List<Object> get props => [movies, defaultIndex];
+  List<Object> get props => [movies, defaultIndex, loaded];
 
   MovieCarousalState copyWith({
-    List<MovieEntity>? movies,
+    Either<Failure, List<MovieEntity>>? movies,
     int? defaultIndex,
     bool? loaded,
   }) {

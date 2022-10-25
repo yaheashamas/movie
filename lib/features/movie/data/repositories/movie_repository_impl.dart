@@ -1,5 +1,4 @@
 import 'package:movies/core/error/handel_body_repository_impl.dart/handel_body_repository_impl.dart';
-import 'package:movies/core/interNet/connection.dart';
 import 'package:movies/features/movie/data/datasources/movie_remote_data_source.dart';
 import 'package:movies/features/movie/data/models/movie_model.dart';
 import 'package:movies/core/error/failure/failure.dart';
@@ -12,8 +11,7 @@ class MovieRepositoryImpl extends HandelBodyRepositoryImpl
 
   MovieRepositoryImpl(
     this.movieRemoteDateSource,
-    ConnectionToEnterNet connectionToEnterNet,
-  ) : super(connectionToEnterNet);
+  ) : super();
 
   @override
   Future<Either<Failure, List<MovieModel>>> getComingSoon() async {

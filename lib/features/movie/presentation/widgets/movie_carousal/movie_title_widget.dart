@@ -13,7 +13,7 @@ class MovieTitleWidget extends StatelessWidget {
     return BlocBuilder<MovieCarousalCubit, MovieCarousalState>(
       builder: (context, state) {
         return Text(
-          state.movies[state.defaultIndex].title,
+          state.movies.foldRight([], (r, previous) => r)[state.defaultIndex].title,
           textAlign: TextAlign.center,
           maxLines: 1,
           overflow: TextOverflow.fade,

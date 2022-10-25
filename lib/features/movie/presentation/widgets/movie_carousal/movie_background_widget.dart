@@ -9,7 +9,6 @@ import 'package:movies/features/movie/presentation/bloc/movie_carousal/movie_car
 import 'package:movies/features/movie/presentation/bloc/movie_carousal/movie_carousal_state.dart';
 
 class MovieBackGroundWidget extends StatelessWidget {
-
   const MovieBackGroundWidget({
     Key? key,
   }) : super(key: key);
@@ -34,7 +33,7 @@ class MovieBackGroundWidget extends StatelessWidget {
                 builder: (context, state) {
                   return CachedNetworkImage(
                     imageUrl:
-                        '${Api.baseImageKey}${state.movies[state.defaultIndex].backdropPath}',
+                        '${Api.baseImageKey}${state.movies.foldRight([], (r, previous) => r)[state.defaultIndex].backdropPath}',
                     fit: BoxFit.fitHeight,
                   );
                 },

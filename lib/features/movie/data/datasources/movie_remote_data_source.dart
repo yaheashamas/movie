@@ -1,5 +1,3 @@
-import 'package:dio/dio.dart';
-import 'package:movies/core/error/exception/exception.dart';
 import 'package:movies/core/network/api.dart';
 import 'package:movies/features/movie/data/datasources/const.dart';
 import 'package:movies/features/movie/data/models/movie_model.dart';
@@ -15,45 +13,29 @@ abstract class MovieRemoteDateSource {
 class MovieRemoteDateSourceImpl extends MovieRemoteDateSource {
   @override
   Future<List<MovieModel>> getTrending() async {
-    try {
-      var response = await Api.dio.get(trendingAPI);
-      final movies = MoviesResultModel.fromJson(response.data).movies;
-      return movies;
-    } on DioError catch (e) {
-      throw ServerException(e.message);
-    }
+    var response = await Api.dio.get(trendingAPI);
+    final movies = MoviesResultModel.fromJson(response.data).movies;
+    return movies;
   }
 
   @override
   Future<List<MovieModel>> getPopular() async {
-    try {
-      var response = await Api.dio.get(popularAPI);
-      final movies = MoviesResultModel.fromJson(response.data).movies;
-      return movies;
-    } on DioError catch (e) {
-      throw ServerException(e.message);
-    }
+    var response = await Api.dio.get(popularAPI);
+    final movies = MoviesResultModel.fromJson(response.data).movies;
+    return movies;
   }
 
   @override
   Future<List<MovieModel>> getComingSoon() async {
-    try {
-      var response = await Api.dio.get(comingSoonAPI);
-      final movies = MoviesResultModel.fromJson(response.data).movies;
-      return movies;
-    } on DioError catch (e) {
-      throw ServerException(e.message);
-    }
+    var response = await Api.dio.get(comingSoonAPI);
+    final movies = MoviesResultModel.fromJson(response.data).movies;
+    return movies;
   }
 
   @override
   Future<List<MovieModel>> getPlayingNow() async {
-    try {
-      var response = await Api.dio.get(playingNowAPI);
-      final movies = MoviesResultModel.fromJson(response.data).movies;
-      return movies;
-    } on DioError catch (e) {
-      throw ServerException(e.message);
-    }
+    var response = await Api.dio.get(playingNowAPI);
+    final movies = MoviesResultModel.fromJson(response.data).movies;
+    return movies;
   }
 }
