@@ -3,6 +3,8 @@ import 'package:movies/features/movie/data/datasources/movie_remote_data_source.
 import 'package:movies/features/movie/data/models/movie_model.dart';
 import 'package:movies/core/error/failure/failure.dart';
 import 'package:dartz/dartz.dart';
+import 'package:movies/features/movie/domain/entities/movie_detail_entity.dart';
+import 'package:movies/features/movie/domain/entities/movie_params.dart';
 import 'package:movies/features/movie/domain/repositories/movie_repository.dart';
 
 class MovieRepositoryImpl extends HandelBodyRepositoryImpl
@@ -41,6 +43,14 @@ class MovieRepositoryImpl extends HandelBodyRepositoryImpl
   Future<Either<Failure, List<MovieModel>>> getTrending() async {
     return body(() async {
       var result = await movieRemoteDateSource.getTrending();
+      return right(result);
+    });
+  }
+
+  @override
+  Future<Either<Failure, MovieDetailEntity>> getMovieDetails(MovieParams movieParams) {
+    return body(() async {
+      var result = await movieRemoteDateSource.getMovieDetail(movieParams);
       return right(result);
     });
   }

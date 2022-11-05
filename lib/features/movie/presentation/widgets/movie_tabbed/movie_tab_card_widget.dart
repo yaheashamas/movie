@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies/config/common/constants/size_constants.dart';
 import 'package:movies/config/common/extensions/string_extensions.dart';
 import 'package:movies/core/network/api.dart';
+import 'package:movies/core/routes/routes.dart';
+import 'package:movies/features/movie/presentation/widgets/movie_detail/movie_detail_screen.dart';
 
 class MovieTabCardWidget extends StatelessWidget {
   final int movieId;
@@ -18,29 +20,37 @@ class MovieTabCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(Sizes.dimen_16.w),
-            child: CachedNetworkImage(
-              imageUrl: '${Api.baseImageKey}$posterPath',
-              fit: BoxFit.cover,
+    return GestureDetector(
+      onTap: () {
+        navigateTo(
+          context: context,
+          widget: MovieDetailScreen(movieId: movieId),
+        );
+      },
+      child: Column(
+        children: [
+          Expanded(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(Sizes.dimen_16.w),
+              child: CachedNetworkImage(
+                imageUrl: '${Api.baseImageKey}$posterPath',
+                fit: BoxFit.cover,
+              ),
             ),
           ),
-        ),
-        Padding(
-          padding: EdgeInsets.only(
-            top: Sizes.dimen_4.h,
-          ),
-          child: Text(
-            title.intelliTrim(),
-            maxLines: 1,
-            textAlign: TextAlign.center,
-            style: Theme.of(context).textTheme.bodyText2,
-          ),
-        )
-      ],
+          Padding(
+            padding: EdgeInsets.only(
+              top: Sizes.dimen_4.h,
+            ),
+            child: Text(
+              title.intelliTrim(),
+              maxLines: 1,
+              textAlign: TextAlign.center,
+              style: Theme.of(context).textTheme.bodyText2,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

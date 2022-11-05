@@ -3,61 +3,89 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/core/widgets/drawer/navigation_drawer_widget.dart';
 import 'package:movies/core/widgets/internet/custom_no_internet.dart';
 import 'package:movies/di.dart';
-import 'package:movies/features/movie/presentation/bloc/movie_carousal/movie_carousal_cubit.dart';
-import 'package:movies/features/movie/presentation/bloc/movie_carousal/movie_carousal_state.dart';
+import 'package:movies/features/movie/presentation/bloc/movie_carousel/movie_background/movie_background_cubit.dart';
+import 'package:movies/features/movie/presentation/bloc/movie_carousel/movie_carousel_cubit.dart';
+import 'package:movies/features/movie/presentation/bloc/movie_carousel/movie_carousel_state.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_tabbed/movie_tabbed_cubit.dart';
-import 'package:movies/features/movie/presentation/widgets/movie_carousal/movie_carousal_error_widget.dart';
 import 'package:movies/features/movie/presentation/widgets/movie_carousal/movie_carousal_widget.dart';
 import 'package:movies/features/movie/presentation/widgets/movie_tabbed/movie_tab_movie_widget.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  late MovieCarouselCubit movieCarouselCubit;
+  late MovieBackgroundCubit movieBackgroundCubit;
+  late MovieTabbedCubit movieTabbedCubit;
+
+  @override
+  void initState() {
+    super.initState();
+    movieCarouselCubit = getIt<MovieCarouselCubit>();
+    movieBackgroundCubit = movieCarouselCubit.movieBackgroundCubit;
+    movieTabbedCubit = getIt<MovieTabbedCubit>();
+    movieCarouselCubit.loadCarousel();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    movieCarouselCubit.close();
+    movieBackgroundCubit.close();
+    movieTabbedCubit.close();
+  }
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => getIt.get<MovieCarousalCubit>()..loadCarousel(),
+          create: (context) => movieCarouselCubit,
         ),
         BlocProvider(
-          create: (context) => getIt.get<MovieTabbedCubit>()..movieTabChanged(),
+          create: (context) => movieBackgroundCubit,
+        ),
+        BlocProvider(
+          create: (context) => movieTabbedCubit,
         ),
       ],
       child: Scaffold(
         drawer: const NavigationDrawerWidget(),
-        body: BlocBuilder<MovieCarousalCubit, MovieCarousalState>(
+        body: BlocBuilder<MovieCarouselCubit, MovieCarouselState>(
           builder: (context, state) {
-            var bloc = MovieCarousalCubit.get(context);
-            return state.movies.fold(
-              (l) => MovieCarousalErrorWidget(
-                failureType: l.failureType,
-                onPressedRetry: () => bloc..loadCarousel(),
-              ),
-              (movies) => state.loaded
-                  ? const Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : Stack(
-                      fit: StackFit.expand,
-                      children: [
-                        FractionallySizedBox(
-                          alignment: Alignment.topCenter,
-                          heightFactor: 0.6,
-                          child: MovieCarousalWidget(
-                            defaultIndex: state.defaultIndex,
-                            movies: movies,
-                          ),
-                        ),
-                        const FractionallySizedBox(
-                          alignment: Alignment.bottomCenter,
-                          heightFactor: 0.4,
-                          child: MovieTabMovieWidget(),
-                        ),
-                        const CustomNoInternet(),
-                      ],
+            if (state is MovieCarouselLoaded) {
+              return Stack(
+                fit: StackFit.expand,
+                children: [
+                  FractionallySizedBox(
+                    alignment: Alignment.topCenter,
+                    heightFactor: 0.6,
+                    child: MovieCarousalWidget(
+                      defaultIndex: state.defaultIndex,
+                      movies: state.movies,
                     ),
-            );
+                  ),
+                  const FractionallySizedBox(
+                    alignment: Alignment.bottomCenter,
+                    heightFactor: 0.4,
+                    child: MovieTabMovieWidget(),
+                  ),
+                  const CustomNoInternet(),
+                ],
+              );
+            }
+            //  else if (state is MovieCarouselError) {
+            //   return MovieCarousalErrorWidget(
+            //     failureType:state.errorType ,
+            //     onPressedRetry: () => movieCarouselCubit.loadCarousel(),,
+            //     errorType: ,
+            //   );
+            // }
+            return const SizedBox.shrink();
           },
         ),
       ),

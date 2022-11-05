@@ -28,6 +28,7 @@ dependencies:
     sdk: flutter
   wiredash: ^1.5.0
   shimmer: ^2.0.0
+  flare_flutter: ^3.0.2
   
 dev_dependencies:
   flutter_test:
@@ -41,3 +42,4 @@ flutter:
     - assets/svgs/
     - assets/pngs/
     - assets/languages/
+    - assets/animations/

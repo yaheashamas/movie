@@ -2,14 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies/config/common/constants/route_constants.dart';
+import 'package:movies/config/router/route.dart';
 import 'package:movies/config/theme/theme_color.dart';
 import 'package:movies/config/theme/theme_text.dart';
 import 'package:movies/config/common/constants/languages.dart';
 import 'package:movies/core/language/app_localization.dart';
+import 'package:movies/core/widgets/navigator/fade_page_route_builder.dart';
 import 'package:movies/di.dart';
 import 'package:movies/features/movie/presentation/bloc/language/language_bloc.dart';
-import 'package:movies/features/movie/presentation/pages/home_screen.dart';
+import 'package:movies/features/movie/presentation/bloc/loading/loading_cubit.dart';
+import 'package:movies/features/movie/presentation/bloc/movie_carousel/movie_background/movie_background_cubit.dart';
 import 'package:movies/features/movie/presentation/widgets/feedback/wiredash_widget.dart';
+import 'package:movies/features/movie/presentation/widgets/loading/loading_screen.dart';
 
 class MovieAppScreen extends StatelessWidget {
   final navKey = GlobalKey<NavigatorState>();
@@ -17,8 +22,15 @@ class MovieAppScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => getIt.get<LanguageBloc>(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => getIt.get<LanguageBloc>(),
+        ),
+        BlocProvider(
+          create: (context) => getIt.get<LoadingCubit>(),
+        ),
+      ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, state) {
           if (state is LanguageLoaded) {
@@ -54,7 +66,20 @@ class MovieAppScreen extends StatelessWidget {
                       GlobalWidgetsLocalizations.delegate,
                       GlobalCupertinoLocalizations.delegate,
                     ],
-                    home: const HomeScreen(),
+                    builder: (context, child) {
+                      return LoadingScreen(
+                        screen: child!,
+                      );
+                    },
+                    initialRoute: RouteList.initial,
+                    onGenerateRoute: (settings) {
+                      final routes = Routes.getRoutes(settings);
+                      final WidgetBuilder? builder = routes[settings.name];
+                      return FadePageRouteBuilder(
+                        builder: builder!,
+                        settings: settings,
+                      );
+                    },
                   ),
                 );
               },
