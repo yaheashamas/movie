@@ -29,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     movieBackgroundCubit = movieCarouselCubit.movieBackgroundCubit;
     movieTabbedCubit = getIt<MovieTabbedCubit>();
     movieCarouselCubit.loadCarousel();
+    movieTabbedCubit.movieTabChanged();
   }
 
   @override

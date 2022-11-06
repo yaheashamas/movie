@@ -12,7 +12,6 @@ import 'package:movies/core/widgets/navigator/fade_page_route_builder.dart';
 import 'package:movies/di.dart';
 import 'package:movies/features/movie/presentation/bloc/language/language_bloc.dart';
 import 'package:movies/features/movie/presentation/bloc/loading/loading_cubit.dart';
-import 'package:movies/features/movie/presentation/bloc/movie_carousel/movie_background/movie_background_cubit.dart';
 import 'package:movies/features/movie/presentation/widgets/feedback/wiredash_widget.dart';
 import 'package:movies/features/movie/presentation/widgets/loading/loading_screen.dart';
 

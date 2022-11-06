@@ -1,8 +1,11 @@
 import 'package:movies/core/network/api.dart';
 import 'package:movies/features/movie/data/datasources/const.dart';
+import 'package:movies/features/movie/data/models/cast_crew_result_data_model.dart';
 import 'package:movies/features/movie/data/models/movie_detail_model.dart';
 import 'package:movies/features/movie/data/models/movie_model.dart';
 import 'package:movies/features/movie/data/models/movies_result_model.dart';
+import 'package:movies/features/movie/data/models/video_model.dart';
+import 'package:movies/features/movie/data/models/video_result_model.dart';
 import 'package:movies/features/movie/domain/entities/movie_params.dart';
 
 abstract class MovieRemoteDateSource {
@@ -11,6 +14,8 @@ abstract class MovieRemoteDateSource {
   Future<List<MovieModel>> getComingSoon();
   Future<List<MovieModel>> getPlayingNow();
   Future<MovieDetailModel> getMovieDetail(MovieParams movieParams);
+  Future<List<CastModel>> getCastCrew(int id);
+  Future<List<VideoModel>> getVideos(int id);
 }
 
 class MovieRemoteDateSourceImpl extends MovieRemoteDateSource {
@@ -44,8 +49,22 @@ class MovieRemoteDateSourceImpl extends MovieRemoteDateSource {
 
   @override
   Future<MovieDetailModel> getMovieDetail(MovieParams movieParams) async {
-    var response = await Api.dio.get("$movieDetailsAPI${movieParams.id}${Api.apiKey}");
+    var response = await Api.dio.get("$movieAPI${movieParams.id}${Api.apiKey}");
     final movie = MovieDetailModel.fromJson(response.data);
     return movie;
+  }
+
+  @override
+  Future<List<CastModel>> getCastCrew(int id) async {
+    var response = await Api.dio.get("$movieAPI$id$movieCastListAPI");
+    final cast = CastCrewResultModel.fromJson(response.data).cast;
+    return cast;
+  }
+
+  @override
+  Future<List<VideoModel>> getVideos(int id) async {
+    var response = await Api.dio.get("$movieAPI$id$movieVideosAPI");
+    final videos = VideoResultModel.fromJson(response.data).videos;
+    return videos;
   }
 }
