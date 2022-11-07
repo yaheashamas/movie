@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies/config/common/constants/route_constants.dart';
 import 'package:movies/config/common/constants/size_constants.dart';
 import 'package:movies/config/common/constants/translation_constants.dart';
-import 'package:movies/core/widgets/button/button.dart';
+import 'package:movies/core/widgets/global/button_widget.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_detail/videos/videos_cubit.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_detail/videos/videos_state.dart';
 import 'package:movies/features/movie/presentation/widgets/watch_video/watch_video_arguments.dart';
@@ -27,7 +27,7 @@ class VideosWidget extends StatelessWidget {
             padding: EdgeInsets.symmetric(
               horizontal: Sizes.dimen_16.w,
             ),
-            child: Button(
+            child: ButtonWidget(
               text: TranslationConstants.watchTrailers,
               onPressed: () {
                 Navigator.of(context).pushNamed(

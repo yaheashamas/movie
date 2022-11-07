@@ -10,6 +10,7 @@ import 'package:movies/features/movie/domain/usecases/get_playing_now_use_case.d
 import 'package:movies/features/movie/domain/usecases/get_popular_use_case.dart';
 import 'package:movies/features/movie/domain/usecases/get_trending_use_case.dart';
 import 'package:movies/features/movie/domain/usecases/get_videos_use_case.dart';
+import 'package:movies/features/movie/domain/usecases/search_movies_use_case.dart';
 import 'package:movies/features/movie/presentation/bloc/internet/internet_bloc.dart';
 import 'package:movies/features/movie/presentation/bloc/language/language_bloc.dart';
 import 'package:movies/features/movie/presentation/bloc/loading/loading_cubit.dart';
@@ -18,6 +19,7 @@ import 'package:movies/features/movie/presentation/bloc/movie_carousel/movie_car
 import 'package:movies/features/movie/presentation/bloc/movie_detail/cast/cast_cubit.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_detail/movie_detail_cubit.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_detail/videos/videos_cubit.dart';
+import 'package:movies/features/movie/presentation/bloc/movie_search/movie_search_cubit.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_tabbed/movie_tabbed_cubit.dart';
 
 final getIt = GetIt.instance;
@@ -45,6 +47,7 @@ Future<void> configureInjection() async {
   getIt.registerLazySingleton(() => GetMovieDetailUseCase(getIt()));
   getIt.registerLazySingleton(() => GetCastUseCase(getIt()));
   getIt.registerLazySingleton(() => GetVideosUseCase(getIt()));
+  getIt.registerLazySingleton(() => SearchMoviesUseCase(getIt()));
   //bloc
   getIt.registerSingleton<LoadingCubit>(LoadingCubit());
   getIt.registerFactory(() => MovieBackgroundCubit());
@@ -63,6 +66,10 @@ Future<void> configureInjection() async {
   getIt.registerFactory<MovieDetailCubit>(() => MovieDetailCubit(
         getIt(),
         getIt(),
+        getIt(),
+        getIt(),
+      ));
+  getIt.registerFactory<MovieSearchCubit>(() => MovieSearchCubit(
         getIt(),
         getIt(),
       ));

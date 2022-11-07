@@ -16,6 +16,7 @@ abstract class MovieRemoteDateSource {
   Future<MovieDetailModel> getMovieDetail(MovieParams movieParams);
   Future<List<CastModel>> getCastCrew(int id);
   Future<List<VideoModel>> getVideos(int id);
+  Future<List<MovieModel>> getSearchedMovies(String searchTerm);
 }
 
 class MovieRemoteDateSourceImpl extends MovieRemoteDateSource {
@@ -66,5 +67,12 @@ class MovieRemoteDateSourceImpl extends MovieRemoteDateSource {
     var response = await Api.dio.get("$movieAPI$id$movieVideosAPI");
     final videos = VideoResultModel.fromJson(response.data).videos;
     return videos;
+  }
+
+  @override
+  Future<List<MovieModel>> getSearchedMovies(String searchTerm) async {
+    final response = await Api.dio.get("$movieSearchAPI$searchTerm");
+    final movies = MoviesResultModel.fromJson(response.data).movies;
+    return movies;
   }
 }

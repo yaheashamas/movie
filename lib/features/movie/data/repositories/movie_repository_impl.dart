@@ -5,6 +5,7 @@ import 'package:movies/core/error/failure/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:movies/features/movie/domain/entities/cast_entity.dart';
 import 'package:movies/features/movie/domain/entities/movie_detail_entity.dart';
+import 'package:movies/features/movie/domain/entities/movie_entity.dart';
 import 'package:movies/features/movie/domain/entities/movie_params.dart';
 import 'package:movies/features/movie/domain/entities/video_entity.dart';
 import 'package:movies/features/movie/domain/repositories/movie_repository.dart';
@@ -71,6 +72,16 @@ class MovieRepositoryImpl extends HandelBodyRepositoryImpl
   Future<Either<Failure, List<VideoEntity>>> getVideos(int id) async {
     return body(() async {
       var result = await movieRemoteDateSource.getVideos(id);
+      return right(result);
+    });
+  }
+
+  @override
+  Future<Either<Failure, List<MovieEntity>>> getSearchedMovies(
+    String searchTerm,
+  ) async {
+    return body(() async {
+      var result = await movieRemoteDateSource.getSearchedMovies(searchTerm);
       return right(result);
     });
   }

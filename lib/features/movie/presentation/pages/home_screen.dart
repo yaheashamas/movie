@@ -6,6 +6,7 @@ import 'package:movies/di.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_carousel/movie_background/movie_background_cubit.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_carousel/movie_carousel_cubit.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_carousel/movie_carousel_state.dart';
+import 'package:movies/features/movie/presentation/bloc/movie_search/movie_search_cubit.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_tabbed/movie_tabbed_cubit.dart';
 import 'package:movies/features/movie/presentation/widgets/movie_carousal/movie_carousal_widget.dart';
 import 'package:movies/features/movie/presentation/widgets/movie_tabbed/movie_tab_movie_widget.dart';
@@ -21,6 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   late MovieCarouselCubit movieCarouselCubit;
   late MovieBackgroundCubit movieBackgroundCubit;
   late MovieTabbedCubit movieTabbedCubit;
+  late MovieSearchCubit movieSearchCubit;
 
   @override
   void initState() {
@@ -28,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
     movieCarouselCubit = getIt<MovieCarouselCubit>();
     movieBackgroundCubit = movieCarouselCubit.movieBackgroundCubit;
     movieTabbedCubit = getIt<MovieTabbedCubit>();
+    movieSearchCubit = getIt<MovieSearchCubit>();
     movieCarouselCubit.loadCarousel();
     movieTabbedCubit.movieTabChanged();
   }
@@ -38,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
     movieCarouselCubit.close();
     movieBackgroundCubit.close();
     movieTabbedCubit.close();
+    movieSearchCubit.close();
   }
 
   @override
@@ -52,6 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         BlocProvider(
           create: (context) => movieTabbedCubit,
+        ),
+        BlocProvider(
+          create: (context) => movieSearchCubit,
         ),
       ],
       child: Scaffold(

@@ -7,3 +7,4 @@ const String playingNowAPI = "movie/now_playing${Api.apiKey}";
 const String movieAPI = "movie/";
 const String movieCastListAPI = "/credits${Api.apiKey}";
 const String movieVideosAPI = "/videos${Api.apiKey}";
+const String movieSearchAPI = "search/movie${Api.apiKey}&query=";
