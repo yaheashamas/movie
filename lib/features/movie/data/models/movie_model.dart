@@ -1,36 +1,29 @@
 import '../../domain/entities/movie_entity.dart';
 
 class MovieModel extends MovieEntity {
-  final int id;
   final bool? video;
   final int? voteCount;
-  final double? voteAverage;
-  final String title;
-  final String? releaseDate;
   final String? originalLanguage;
   final String? originalTitle;
   final List<int>? genreIds;
-  final String backdropPath;
   final bool? adult;
-  final String? overview;
-  final String posterPath;
   final double? popularity;
   final String? mediaType;
 
-  MovieModel({
-    required this.id,
+  const MovieModel({
+    required int id,
+    required String title,
+    required String posterPath,
+    required String backdropPath,
+    String? overview,
+    double? voteAverage,
+    String? releaseDate,
     this.video,
     this.voteCount,
-    this.voteAverage,
-    required this.title,
-    this.releaseDate,
     this.originalLanguage,
     this.originalTitle,
     this.genreIds,
-    required this.backdropPath,
     this.adult,
-    this.overview,
-    required this.posterPath,
     this.popularity,
     this.mediaType,
   }) : super(
@@ -64,22 +57,22 @@ class MovieModel extends MovieEntity {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data =  Map<String, dynamic>();
-    data['id'] = this.id;
-    data['video'] = this.video;
-    data['vote_count'] = this.voteCount;
-    data['vote_average'] = this.voteAverage;
-    data['title'] = this.title;
-    data['release_date'] = this.releaseDate;
-    data['original_language'] = this.originalLanguage;
-    data['original_title'] = this.originalTitle;
-    data['genre_ids'] = this.genreIds;
-    data['backdrop_path'] = this.backdropPath;
-    data['adult'] = this.adult;
-    data['overview'] = this.overview;
-    data['poster_path'] = this.posterPath;
-    data['popularity'] = this.popularity;
-    data['media_type'] = this.mediaType;
+    final Map<String, dynamic> data = {};
+    data['id'] = id;
+    data['video'] = video;
+    data['vote_count'] = voteCount;
+    data['vote_average'] = voteAverage;
+    data['title'] = title;
+    data['release_date'] = releaseDate;
+    data['original_language'] = originalLanguage;
+    data['original_title'] = originalTitle;
+    data['genre_ids'] = genreIds;
+    data['backdrop_path'] = backdropPath;
+    data['adult'] = adult;
+    data['overview'] = overview;
+    data['poster_path'] = posterPath;
+    data['popularity'] = popularity;
+    data['media_type'] = mediaType;
     return data;
   }
 }

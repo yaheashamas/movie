@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 class Api {
-  static const String apiKey = "?api_key=f33521953035af3fc3162fe1ac22e60c";
+  static const String apiKey = "?api_key=07aaa3e2e3df0dd5a232eeb7569cc02a";
   static const String baseImageKey = "https://image.tmdb.org/t/p/w500/";
 
   static var options = BaseOptions(

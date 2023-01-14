@@ -1,38 +1,36 @@
-
 import 'package:equatable/equatable.dart';
+import 'package:movies/core/error/failure/failure.dart';
 import 'package:movies/features/movie/domain/entities/movie_entity.dart';
 
-class MovieTabbedState extends Equatable {
-  final List<MovieEntity> movies;
+abstract class MovieTabbedState extends Equatable {
   final int defaultIndex;
-  final bool loaded;
+  const MovieTabbedState({this.defaultIndex = 0});
+  List<Object?> get props => [defaultIndex];
+}
 
-  const MovieTabbedState({
+class MovieTabbedInitial extends MovieTabbedState {}
+
+class MovieTabbedChanged extends MovieTabbedState {
+  final List<MovieEntity> movies;
+
+  const MovieTabbedChanged({
     required this.movies,
-    required this.defaultIndex,
-    required this.loaded,
-  });
-
-  factory MovieTabbedState.init() {
-    return const MovieTabbedState(
-      movies: [],
-      defaultIndex: 0,
-      loaded: false,
-    );
-  }
+    int defaultIndex = 0,
+  }) : super(defaultIndex: defaultIndex);
 
   @override
   List<Object> get props => [movies, defaultIndex];
+}
 
-  MovieTabbedState copyWith({
-    List<MovieEntity>? movies,
-    int? defaultIndex,
-    bool? loaded,
-  }) {
-    return MovieTabbedState(
-      movies: movies ?? this.movies,
-      defaultIndex: defaultIndex ?? this.defaultIndex,
-      loaded: loaded ?? this.loaded,
-    );
-  }
+class MovieTabbedError extends MovieTabbedState {
+  final FailureType failureType;
+  const MovieTabbedError({
+    required this.failureType,
+    int defaultIndex = 0,
+  }) : super(defaultIndex: defaultIndex);
+}
+
+class MovieTabLoading extends MovieTabbedState {
+  const MovieTabLoading({int currentTabIndex = 0})
+      : super(defaultIndex: currentTabIndex);
 }

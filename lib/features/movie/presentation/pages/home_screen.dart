@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/core/widgets/drawer/navigation_drawer_widget.dart';
-import 'package:movies/core/widgets/internet/custom_no_internet.dart';
 import 'package:movies/di.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_carousel/movie_background/movie_background_cubit.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_carousel/movie_carousel_cubit.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_carousel/movie_carousel_state.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_search/movie_search_cubit.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_tabbed/movie_tabbed_cubit.dart';
+import 'package:movies/features/movie/presentation/widgets/app_error/app_error_widget.dart';
 import 'package:movies/features/movie/presentation/widgets/movie_carousal/movie_carousal_widget.dart';
 import 'package:movies/features/movie/presentation/widgets/movie_tabbed/movie_tab_movie_widget.dart';
 
@@ -82,17 +82,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     heightFactor: 0.4,
                     child: MovieTabMovieWidget(),
                   ),
-                  const CustomNoInternet(),
                 ],
               );
+            } else if (state is MovieCarouselError) {
+              return AppErrorWidget(
+                failureType: state.failureType,
+                onPressedRetry: () => movieCarouselCubit.loadCarousel(),
+              );
             }
-            //  else if (state is MovieCarouselError) {
-            //   return MovieCarousalErrorWidget(
-            //     failureType:state.errorType ,
-            //     onPressedRetry: () => movieCarouselCubit.loadCarousel(),,
-            //     errorType: ,
-            //   );
-            // }
             return const SizedBox.shrink();
           },
         ),

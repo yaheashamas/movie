@@ -6,6 +6,7 @@ import 'package:movies/config/common/constants/translation_constants.dart';
 import 'package:movies/config/common/extensions/string_extensions.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_tabbed/movie_tabbed_cubit.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_tabbed/movie_tabbed_state.dart';
+import 'package:movies/features/movie/presentation/widgets/app_error/app_error_widget.dart';
 import 'package:movies/features/movie/presentation/widgets/movie_tabbed/movie_list_view_builder_widget.dart';
 import 'package:movies/features/movie/presentation/widgets/movie_tabbed/movie_tab_constants.dart';
 import 'package:movies/features/movie/presentation/widgets/movie_tabbed/movie_tab_title_widget.dart';
@@ -15,6 +16,7 @@ class MovieTabMovieWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var bloc = MovieTabbedCubit.get(context);
     return BlocBuilder<MovieTabbedCubit, MovieTabbedState>(
       builder: (context, state) {
         return Padding(
@@ -39,15 +41,23 @@ class MovieTabMovieWidget extends StatelessWidget {
                 ],
               ),
               SizedBox(height: Sizes.dimen_10.h),
-              Expanded(
-                child: state.movies.isEmpty
-                    ? Center(
-                        child: Text(
-                          TranslationConstants.noMovies.t(context),
-                        ),
-                      )
-                    : MovieListViewBuilderWidget(movies: state.movies),
-              ),
+              if (state is MovieTabbedChanged)
+                Expanded(
+                  child: state.movies.isEmpty
+                      ? Center(
+                          child: Text(
+                            TranslationConstants.noMovies.t(context),
+                          ),
+                        )
+                      : MovieListViewBuilderWidget(movies: state.movies),
+                ),
+              if (state is MovieTabbedError)
+                Expanded(
+                  child: AppErrorWidget(
+                    failureType: state.failureType,
+                    onPressedRetry: () => bloc.movieTabChanged(),
+                  ),
+                ),
             ],
           ),
         );

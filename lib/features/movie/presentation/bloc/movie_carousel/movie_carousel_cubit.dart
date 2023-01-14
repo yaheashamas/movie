@@ -21,7 +21,7 @@ class MovieCarouselCubit extends Cubit<MovieCarouselState> {
     loadingCubit.show();
     final moviesEither = await getTrendingUseCase();
     emit(moviesEither.fold(
-      (l) => MovieCarouselError(),
+      (l) => MovieCarouselError(failureType: l.failureType),
       (movies) {
         movieBackgroundCubit.backdropChanged(movies[defaultIndex]);
         return MovieCarouselLoaded(

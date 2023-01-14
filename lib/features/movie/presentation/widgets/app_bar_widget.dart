@@ -24,12 +24,12 @@ class AppBarWidget extends StatelessWidget {
             onPressed: () => Scaffold.of(context).openDrawer(),
             icon: SvgPicture.asset(
               'assets/svgs/menu.svg',
-              height: Sizes.dimen_12.h,
+              height: Sizes.dimen_24.h,
             ),
           ),
           const Expanded(
             child: LogoWidget(
-              height: Sizes.dimen_14,
+              height: Sizes.dimen_24,
             ),
           ),
           IconButton(
@@ -44,7 +44,7 @@ class AppBarWidget extends StatelessWidget {
             icon: Icon(
               Icons.search,
               color: Colors.white,
-              size: Sizes.dimen_12.h,
+              size: Sizes.dimen_24.h,
             ),
           ),
         ],

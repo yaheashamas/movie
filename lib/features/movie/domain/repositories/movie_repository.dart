@@ -1,6 +1,5 @@
 import 'package:dartz/dartz.dart';
 import 'package:movies/core/error/failure/failure.dart';
-import 'package:movies/features/movie/data/models/movie_model.dart';
 import 'package:movies/features/movie/domain/entities/cast_entity.dart';
 import 'package:movies/features/movie/domain/entities/movie_detail_entity.dart';
 import 'package:movies/features/movie/domain/entities/movie_entity.dart';

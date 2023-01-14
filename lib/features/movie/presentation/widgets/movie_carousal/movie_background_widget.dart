@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies/config/common/constants/size_constants.dart';
 import 'package:movies/core/network/api.dart';
-import 'package:movies/features/movie/domain/entities/movie_entity.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_carousel/movie_background/movie_background_cubit.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_carousel/movie_background/movie_background_state.dart';
 

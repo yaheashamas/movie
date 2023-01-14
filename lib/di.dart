@@ -1,5 +1,4 @@
 import 'package:get_it/get_it.dart';
-import 'package:movies/core/interNet/connection.dart';
 import 'package:movies/features/movie/data/datasources/movie_remote_data_source.dart';
 import 'package:movies/features/movie/data/repositories/movie_repository_impl.dart';
 import 'package:movies/features/movie/domain/repositories/movie_repository.dart';
@@ -11,7 +10,6 @@ import 'package:movies/features/movie/domain/usecases/get_popular_use_case.dart'
 import 'package:movies/features/movie/domain/usecases/get_trending_use_case.dart';
 import 'package:movies/features/movie/domain/usecases/get_videos_use_case.dart';
 import 'package:movies/features/movie/domain/usecases/search_movies_use_case.dart';
-import 'package:movies/features/movie/presentation/bloc/internet/internet_bloc.dart';
 import 'package:movies/features/movie/presentation/bloc/language/language_bloc.dart';
 import 'package:movies/features/movie/presentation/bloc/loading/loading_cubit.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_carousel/movie_background/movie_background_cubit.dart';
@@ -24,11 +22,6 @@ import 'package:movies/features/movie/presentation/bloc/movie_tabbed/movie_tabbe
 
 final getIt = GetIt.instance;
 Future<void> configureInjection() async {
-  //configuration app
-  getIt.registerLazySingleton<ConnectionToEnterNet>(
-    () => ConnectionToEnterNetImpl(),
-  );
-  //first feature
   //data source
   getIt.registerLazySingleton<MovieRemoteDateSource>(
     () => MovieRemoteDateSourceImpl(),
@@ -49,7 +42,6 @@ Future<void> configureInjection() async {
   getIt.registerLazySingleton(() => GetVideosUseCase(getIt()));
   getIt.registerLazySingleton(() => SearchMoviesUseCase(getIt()));
   //bloc
-  getIt.registerSingleton<LoadingCubit>(LoadingCubit());
   getIt.registerFactory(() => MovieBackgroundCubit());
   getIt.registerFactory(() => MovieCarouselCubit(
         getIt(),
@@ -73,6 +65,6 @@ Future<void> configureInjection() async {
         getIt(),
         getIt(),
       ));
+  getIt.registerSingleton<LoadingCubit>(LoadingCubit());
   getIt.registerSingleton<LanguageBloc>(LanguageBloc());
-  getIt.registerSingleton<InternetBloc>(InternetBloc());
 }

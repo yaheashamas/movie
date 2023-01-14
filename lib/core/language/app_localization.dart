@@ -10,6 +10,7 @@ class AppLocalization {
   late Map<String, String> _localizedStrings;
 
   AppLocalization({required this.locale});
+  
   Future<bool> load() async {
     final String jsonString = await rootBundle
         .loadString('assets/languages/${locale.languageCode}.json');
@@ -24,9 +25,8 @@ class AppLocalization {
     return _localizedStrings[key];
   }
 
-  static AppLocalization? of(BuildContext context) {
-    return Localizations.of<AppLocalization>(context, AppLocalization);
-  }
+  static AppLocalization? of(context) =>
+      Localizations.of<AppLocalization>(context, AppLocalization);
 
   static LocalizationsDelegate<AppLocalization> delegate =
       _AppLocalizationDelegate();

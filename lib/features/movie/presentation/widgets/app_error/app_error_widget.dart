@@ -5,13 +5,14 @@ import 'package:movies/config/common/constants/translation_constants.dart';
 import 'package:movies/config/common/extensions/string_extensions.dart';
 
 import 'package:movies/core/error/failure/failure.dart';
+import 'package:movies/core/widgets/global/button_widget.dart';
 import 'package:wiredash/wiredash.dart';
 
-class MovieCarousalErrorWidget extends StatelessWidget {
+class AppErrorWidget extends StatelessWidget {
   final FailureType failureType;
-  void Function()? onPressedRetry;
+  final void Function()? onPressedRetry;
 
-  MovieCarousalErrorWidget({
+  const AppErrorWidget({
     Key? key,
     required this.failureType,
     required this.onPressedRetry,
@@ -36,14 +37,15 @@ class MovieCarousalErrorWidget extends StatelessWidget {
           ButtonBar(
             alignment: MainAxisAlignment.center,
             children: <Widget>[
-              TextButton(
-                onPressed: onPressedRetry,
-                child: const Text(TranslationConstants.retry),
+              ButtonWidget(
+                text: TranslationConstants.retry,
+                onPressed: onPressedRetry!,
               ),
-              TextButton(
-                onPressed: () =>
-                    Wiredash.of(context).show(inheritMaterialTheme: true),
-                child: const Text(TranslationConstants.feedback),
+              ButtonWidget(
+                text: TranslationConstants.feedback,
+                onPressed: () => Wiredash.of(context).show(
+                  inheritMaterialTheme: true,
+                ),
               ),
             ],
           ),

@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+
+import 'package:movies/core/error/failure/failure.dart';
 import 'package:movies/features/movie/domain/entities/movie_entity.dart';
 
 abstract class MovieCarouselState extends Equatable {
@@ -10,7 +12,10 @@ abstract class MovieCarouselState extends Equatable {
 
 class MovieCarouselInitial extends MovieCarouselState {}
 
-class MovieCarouselError extends MovieCarouselState {}
+class MovieCarouselError extends MovieCarouselState {
+  final FailureType failureType;
+  const MovieCarouselError({required this.failureType});
+}
 
 class MovieCarouselLoaded extends MovieCarouselState {
   final List<MovieEntity> movies;
