@@ -58,7 +58,7 @@ class MovieDetailBigPostWidget extends StatelessWidget {
           top: ScreenUtil().statusBarHeight + Sizes.dimen_4.h,
           right: Sizes.dimen_16.w,
           left: Sizes.dimen_16.w,
-          child: const MovieDetailAppBarWidget(),
+          child: MovieDetailAppBarWidget(movieDetailEntity: movieDetailEntity,),
         )
       ],
     );

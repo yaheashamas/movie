@@ -1,5 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies/features/movie/domain/usecases/get_trending_use_case.dart';
+import 'package:movies/features/movie/domain/usecases/remote/get_trending_use_case.dart';
 import 'package:movies/features/movie/presentation/bloc/loading/loading_cubit.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_carousel/movie_background/movie_background_cubit.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_carousel/movie_carousel_state.dart';

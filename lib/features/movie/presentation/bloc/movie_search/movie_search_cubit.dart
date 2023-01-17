@@ -3,9 +3,10 @@ import 'package:dartz/dartz.dart';
 import 'package:movies/core/error/failure/failure.dart';
 import 'package:movies/features/movie/domain/entities/movie_entity.dart';
 import 'package:movies/features/movie/domain/entities/movie_search_params.dart';
-import 'package:movies/features/movie/domain/usecases/search_movies_use_case.dart';
 import 'package:movies/features/movie/presentation/bloc/loading/loading_cubit.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_search/movie_search_state.dart';
+
+import '../../../domain/usecases/remote/search_movies_use_case.dart';
 
 class MovieSearchCubit extends Cubit<MovieSearchState> {
   final SearchMoviesUseCase searchMovies;

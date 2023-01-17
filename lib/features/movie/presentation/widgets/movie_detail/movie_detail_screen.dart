@@ -10,6 +10,7 @@ import 'package:movies/features/movie/presentation/bloc/movie_detail/cast/cast_c
 import 'package:movies/features/movie/presentation/bloc/movie_detail/movie_detail_cubit.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_detail/movie_detail_state.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_detail/videos/videos_cubit.dart';
+import 'package:movies/features/movie/presentation/bloc/movie_favorate/movie_favorate_cubit.dart';
 import 'package:movies/features/movie/presentation/widgets/movie_detail/cast_widget.dart';
 import 'package:movies/features/movie/presentation/widgets/movie_detail/movie_detail_arguments.dart';
 import 'package:movies/features/movie/presentation/widgets/movie_detail/movie_detail_big_post_widget.dart';
@@ -30,6 +31,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
   late MovieDetailCubit _movieDetailCubit;
   late CastCubit _castCubit;
   late VideosCubit _videosCubit;
+  late MovieFavorateCubit _movieFavorateCubit;
 
   @override
   void initState() {
@@ -37,7 +39,9 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     _movieDetailCubit = getIt<MovieDetailCubit>();
     _castCubit = _movieDetailCubit.castCubit;
     _videosCubit = _movieDetailCubit.videosCubit;
-    _movieDetailCubit.loadMovieDetail(MovieParams(widget.movieDetailArguments.movieId));
+    _movieFavorateCubit = _movieDetailCubit.movieFavorateCubit;
+    _movieDetailCubit
+        .loadMovieDetail(MovieParams(widget.movieDetailArguments.movieId));
     _castCubit.loadCast(widget.movieDetailArguments.movieId);
   }
 
@@ -46,6 +50,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
     _movieDetailCubit.close();
     _castCubit.close();
     _videosCubit.close();
+    _movieFavorateCubit.close();
     super.dispose();
   }
 
@@ -57,6 +62,7 @@ class _MovieDetailScreenState extends State<MovieDetailScreen> {
           BlocProvider.value(value: _movieDetailCubit),
           BlocProvider.value(value: _castCubit),
           BlocProvider.value(value: _videosCubit),
+          BlocProvider.value(value: _movieFavorateCubit),
         ],
         child: BlocBuilder<MovieDetailCubit, MovieDetailState>(
           builder: (context, state) {

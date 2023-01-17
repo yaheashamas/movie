@@ -3,7 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:movies/core/error/failure/failure.dart';
 import 'package:movies/features/movie/domain/entities/cast_entity.dart';
-import 'package:movies/features/movie/domain/usecases/get_cast_crew_use_case.dart';
+import 'package:movies/features/movie/domain/usecases/remote/get_cast_crew_use_case.dart';
 
 part 'cast_state.dart';
 

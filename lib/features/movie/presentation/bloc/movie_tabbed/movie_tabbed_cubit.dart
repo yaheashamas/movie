@@ -2,9 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movies/core/error/failure/failure.dart';
 import 'package:movies/features/movie/domain/entities/movie_entity.dart';
-import 'package:movies/features/movie/domain/usecases/get_coming_soon_use_case.dart';
-import 'package:movies/features/movie/domain/usecases/get_playing_now_use_case.dart';
-import 'package:movies/features/movie/domain/usecases/get_popular_use_case.dart';
+import 'package:movies/features/movie/domain/usecases/remote/get_coming_soon_use_case.dart';
+import 'package:movies/features/movie/domain/usecases/remote/get_playing_now_use_case.dart';
+import 'package:movies/features/movie/domain/usecases/remote/get_popular_use_case.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_tabbed/movie_tabbed_state.dart';
 
 class MovieTabbedCubit extends Cubit<MovieTabbedState> {

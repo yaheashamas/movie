@@ -4,9 +4,11 @@ import 'package:movies/features/movie/domain/entities/cast_entity.dart';
 import 'package:movies/features/movie/domain/entities/movie_detail_entity.dart';
 import 'package:movies/features/movie/domain/entities/movie_entity.dart';
 import 'package:movies/features/movie/domain/entities/movie_params.dart';
+import 'package:movies/features/movie/domain/entities/tables/movie_table.dart';
 import 'package:movies/features/movie/domain/entities/video_entity.dart';
 
 abstract class MovieRepository {
+  //remoete
   Future<Either<Failure, List<MovieEntity>>> getTrending();
   Future<Either<Failure, List<MovieEntity>>> getPopular();
   Future<Either<Failure, List<MovieEntity>>> getComingSoon();
@@ -19,4 +21,9 @@ abstract class MovieRepository {
   Future<Either<Failure, List<MovieEntity>>> getSearchedMovies(
     String searchTerm,
   );
+  //local
+  Future<Either<Failure, List<MovieTable>>> getAllMovie();
+  Future<Either<Failure, void>> deleteMovie(int movieId);
+  Future<Either<Failure, void>> saveMovie(MovieTable movieTable);
+  Future<Either<Failure, bool>> checkIfMovieExsist(int movieId);
 }

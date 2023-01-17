@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:movies/config/common/constants/route_constants.dart';
 import 'package:movies/config/common/constants/size_constants.dart';
 import 'package:movies/config/common/constants/languages.dart';
 import 'package:movies/config/common/constants/translation_constants.dart';
@@ -11,7 +12,7 @@ import 'package:movies/core/widgets/drawer/navigator_drawer_item_widget.dart';
 import 'package:movies/features/movie/presentation/widgets/logo_widget.dart';
 import 'package:wiredash/wiredash.dart';
 
-import '../../../features/movie/presentation/bloc/language/language_bloc.dart';
+import '../../../features/movie/presentation/bloc/language/language_cubit.dart';
 
 class NavigationDrawerWidget extends StatelessWidget {
   const NavigationDrawerWidget({super.key});
@@ -44,17 +45,17 @@ class NavigationDrawerWidget extends StatelessWidget {
             ),
             NavigatorDrawerItemWidget(
               title: TranslationConstants.favoriteMovies.t(context),
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).pushNamed(RouteList.favorite);
+              },
             ),
             NavigatorDrawerExpansionItemsWidget(
               title: TranslationConstants.language.t(context),
               items: Languages.languages.map((e) => e.value).toList(),
               onTap: (index) {
-                BlocProvider.of<LanguageBloc>(context).add(
-                  ToggleLanguageEvent(
-                    Languages.languages[index],
-                  ),
-                );
+                BlocProvider.of<LanguageCubit>(context)
+                    .updateLanguage(Languages.languages[index]);
               },
             ),
             NavigatorDrawerItemWidget(

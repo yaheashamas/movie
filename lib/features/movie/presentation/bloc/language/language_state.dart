@@ -1,4 +1,5 @@
-part of 'language_bloc.dart';
+import 'dart:ui';
+import 'package:equatable/equatable.dart';
 
 abstract class LanguageState extends Equatable {
   const LanguageState();
@@ -12,3 +13,5 @@ class LanguageLoaded extends LanguageState {
   @override
   List<Object> get props => [locale];
 }
+
+class LanguageError extends LanguageState {}

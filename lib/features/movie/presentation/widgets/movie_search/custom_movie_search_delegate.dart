@@ -4,8 +4,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movies/config/common/constants/size_constants.dart';
 import 'package:movies/config/common/constants/translation_constants.dart';
 import 'package:movies/config/common/extensions/string_extensions.dart';
+import 'package:movies/core/error/failure/failure.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_search/movie_search_cubit.dart';
 import 'package:movies/features/movie/presentation/bloc/movie_search/movie_search_state.dart';
+import 'package:movies/features/movie/presentation/widgets/app_error/app_error_widget.dart';
 import 'movie_search_card.dart';
 
 class CustomSearchDelegate extends SearchDelegate {
@@ -14,7 +16,14 @@ class CustomSearchDelegate extends SearchDelegate {
   CustomSearchDelegate(this.movieSearchCubit);
 
   @override
-  ThemeData appBarTheme(BuildContext context) => Theme.of(context);
+  ThemeData appBarTheme(BuildContext context) => Theme.of(context).copyWith(
+        inputDecorationTheme: const InputDecorationTheme(
+          border: InputBorder.none,
+          disabledBorder: OutlineInputBorder(),
+          hintStyle: TextStyle(color: Colors.white),
+          fillColor: Colors.white,
+        ),
+      );
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -22,7 +31,8 @@ class CustomSearchDelegate extends SearchDelegate {
       IconButton(
         icon: Icon(
           Icons.clear,
-          color: query.isEmpty ? Colors.grey : Theme.of(context).accentColor,
+          color: query.isEmpty ? Colors.white : Colors.red,
+          size: Sizes.dimen_24.h,
         ),
         onPressed: query.isEmpty ? null : () => query = '',
       ),
@@ -31,15 +41,13 @@ class CustomSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildLeading(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        close(context, null);
-      },
-      child: Icon(
+    return IconButton(
+      icon: Icon(
         Icons.arrow_back_ios,
         color: Colors.white,
-        size: Sizes.dimen_12.h,
+        size: Sizes.dimen_24.h,
       ),
+      onPressed: () => close(context, null),
     );
   }
 
@@ -51,7 +59,10 @@ class CustomSearchDelegate extends SearchDelegate {
       bloc: movieSearchCubit,
       builder: (context, state) {
         if (state is MovieSearchError) {
-          return Container();
+          return AppErrorWidget(
+            failureType: FailureType.api,
+            onPressedRetry: () => movieSearchCubit.searchTermChanged(query),
+          );
         } else if (state is MovieSearchLoaded) {
           final movies = state.movies;
           if (movies.isEmpty) {
