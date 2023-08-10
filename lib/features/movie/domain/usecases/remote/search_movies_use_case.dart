@@ -8,7 +8,6 @@ class SearchMoviesUseCase {
   final MovieRepository repository;
   SearchMoviesUseCase(this.repository);
 
-  @override
   Future<Either<Failure, List<MovieEntity>>> call(
     MovieSearchParams searchParams,
   ) async {

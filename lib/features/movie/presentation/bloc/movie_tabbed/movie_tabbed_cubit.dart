@@ -32,7 +32,6 @@ class MovieTabbedCubit extends Cubit<MovieTabbedState> {
         moviesEither = await getComingSonUseCase();
         break;
     }
-
     moviesEither.fold(
       (l) => emit(MovieTabbedError(failureType: l.failureType)),
       (movies) => emit(MovieTabbedChanged(
